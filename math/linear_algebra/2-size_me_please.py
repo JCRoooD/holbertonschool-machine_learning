@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Module that return the shape of a matrix 
+"""Module that return the shape of a matrix
     """
 
 
