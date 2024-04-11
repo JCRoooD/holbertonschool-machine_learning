@@ -2,7 +2,7 @@
 def matrix_shape(matrix):
     """calculate shape of matrix"""
     shape = []
-    while type(matrix) == list:
+    while type(matrix) is list:
         shape.append(len(matrix))
         matrix = matrix[0]
     return shape
