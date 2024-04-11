@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""Module that return the shape of a matrix 
+    """
+
+
 def matrix_shape(matrix):
     """
     Calculate the shape of a matrix.
