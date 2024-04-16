@@ -12,7 +12,8 @@ def bars():
 
     plt.bar([1, 2, 3], fruit[0], color="red", label="apples", width=0.5)
     plt.bar(
-        [1, 2, 3], fruit[1], color="yellow", bottom=fruit[0], label="bananas", width=0.5
+        [1, 2, 3], fruit[1], color="yellow", bottom=fruit[0],
+        label="bananas", width=0.5
     )
     plt.bar(
         [1, 2, 3],
