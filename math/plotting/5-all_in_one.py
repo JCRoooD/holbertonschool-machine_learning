@@ -30,7 +30,7 @@ def all_in_one():
     student_grades = np.random.normal(68, 15, 50)
 
     fig = plt.figure(figsize=(6.4, 4.8))
-    fig.suptitle("All in One", fontsize="x-small")
+    fig.suptitle("All in One")
 
     # Plot 1
     plt.subplot(321)
