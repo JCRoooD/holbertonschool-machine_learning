@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+""" 2. Two is better than one """
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 def two():
-
+    """Exponentional Decay of Radioactive Elements"""
     x = np.arange(0, 21000, 1000)
     r = np.log(0.5)
     t1 = 5730
