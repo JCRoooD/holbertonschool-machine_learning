@@ -95,8 +95,89 @@
   - e^{2x}
 - **File**: `8-all-together`
 
-### Additional Tasks (9-17)
-Further tasks include creating functions to compute squared summations, derivatives of polynomials, and integrals. Each task builds on the understanding of basic calculus principles applied through Python programming.
+### 9. Our life is the sum total of all the decisions we make every day, and those decisions are determined by our priorities
+- **Objective**: Write a function `def summation_i_squared(n):` that calculates \(\sum_{i=1}^{n} i^2\).
+- **Conditions**:
+  - `n` is the stopping condition.
+  - Return the integer value of the sum.
+  - Return `None` if `n` is not a valid number.
+  - No loops are allowed.
+- **File**: `9-sum_total.py`
+
+### 10. Derive happiness in oneself from a good day's work
+- **Objective**: Write a function `def poly_derivative(poly):` that calculates the derivative of a polynomial.
+- **Details**:
+  - `poly` is a list of coefficients representing a polynomial where the index represents the power of x.
+  - Example: if \(f(x) = x^3 + 3x + 5\), `poly` is `[5, 3, 0, 1]`.
+  - Return `None` if `poly` is not valid.
+  - Return `[0]` if the derivative is 0.
+  - Return a new list of coefficients representing the derivative of the polynomial.
+- **File**: `10-matisse.py`
+
+### 11. Good grooming is integral and impeccable style is a must
+- **Objective**: Solve and provide the general formula for the integration of polynomial terms.
+- **Possible Answers**:
+  - \(3x^2 + C\)
+  - \(x^4/4 + C\)
+  - \(x^4 + C\)
+  - \(x^4/3 + C\)
+- **File**: `11-integral`
+
+### 12. We are all an integral part of the web of life
+- **Objective**: Provide the integral result for exponential functions involving y.
+- **Possible Answers**:
+  - \(e^{2y} + C\)
+  - \(e^y + C\)
+  - \(e^{2y}/2 + C\)
+  - \(e^y/2 + C\)
+- **File**: `12-integral`
+
+### 13. Create a definite plan for carrying out your desire and begin at once
+- **Objective**: Solve a specific calculus problem (task specifics not provided in the details).
+- **Possible Answers**:
+  - 3
+  - 6
+  - 9
+  - 27
+- **File**: `13-definite`
+
+### 14. My talents fall within definite limitations
+- **Objective**: Determine the bounds or limits of a given function (task specifics not provided in the details).
+- **Possible Answers**:
+  - -1
+  - 0
+  - 1
+  - undefined
+- **File**: `14-definite`
+
+### 15. Winners are people with definite purpose in life
+- **Objective**: Calculate the output of a function given specific inputs (task specifics not provided in the details).
+- **Possible Answers**:
+  - 5
+  - 5x
+  - 25
+  - 25x
+- **File**: `15-definite`
+
+### 16. Double whammy
+- **Objective**: Solve a calculus problem involving logarithms.
+- **Possible Answers**:
+  - \(9\ln(2)\)
+  - 9
+  - \(27\ln(2)\)
+  - 27
+- **File**: `16-double`
+
+### 17. Integrate
+- **Objective**: Write a function `def poly_integral(poly, C=0):` that calculates the integral of a polynomial.
+- **Details**:
+  - `poly` is a list of coefficients representing a polynomial where the index represents the power of x.
+  - Example: if \(f(x) = x^3 + 3x + 5\), `poly` is `[5, 3, 0, 1]`.
+  - `C` is an integer representing the integration constant.
+  - If a coefficient is a whole number, it should be represented as an integer.
+  - Return `None` if `poly` or `C` are not valid.
+  - Return a new list of coefficients representing the integral of the polynomial, with the list being as small as possible.
+- **File**: `17-integrate.py`
 
 ## Repository Information
 - **GitHub Repository**: holbertonschool-machine_learning
