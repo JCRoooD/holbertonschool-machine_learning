@@ -9,4 +9,7 @@ def poly_derivative(poly):
 
     derivative = [poly[i] * i for i in range(1, len(poly))]
 
+    if not derivative:
+        return [0]
+
     return derivative
