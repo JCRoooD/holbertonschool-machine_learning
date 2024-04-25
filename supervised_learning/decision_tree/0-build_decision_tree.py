@@ -18,7 +18,8 @@ class Node:
         depth=0,
     ):
         """
-        Initialize a node with given feature, threshold, left and right children, root status, and depth.
+        Initialize a node with given feature, threshold,
+        left and right children, root status, and depth.
         """
         self.feature = feature
         self.threshold = threshold
@@ -37,7 +38,8 @@ class Node:
             return self.depth
         else:
             return max(
-                self.left_child.max_depth_below(), self.right_child.max_depth_below()
+                self.left_child.max_depth_below(),
+                self.right_child.max_depth_below()
             )
 
 
@@ -68,10 +70,12 @@ class Decision_Tree:
     """
 
     def __init__(
-        self, max_depth=10, min_pop=1, seed=0, split_criterion="random", root=None
+        self, max_depth=10, min_pop=1, seed=0,
+        split_criterion="random", root=None
     ):
         """
-        Initialize a decision tree with given maximum depth, minimum population, seed, split criterion, and root.
+        Initialize a decision tree with given maximum depth,
+        minimum population, seed, split criterion, and root.
         """
         self.rng = np.random.default_rng(seed)
         if root:
