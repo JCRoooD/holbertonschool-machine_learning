@@ -38,21 +38,23 @@ class Node:
             return self.depth
         else:
             return max(
-                self.left_child.max_depth_below(), self.right_child.max_depth_below()
+                self.left_child.max_depth_below(),
+                self.right_child.max_depth_below()
             )
 
     def count_nodes_below(self, only_leaves=False):
         """
         Counts the number of nodes below the current node in the decision tree.
         """
-        count = 0
+        # ct = count
+        ct = 0
         if not only_leaves or self.is_leaf:
-            count = 1
+            ct = 1
         if not self.is_leaf:
-            count += self.left_child.count_nodes_below(only_leaves=only_leaves)
-            count += self.right_child.count_nodes_below(only_leaves=only_leaves)
+            ct += self.left_child.count_nodes_below(only_leaves=only_leaves)
+            ct += self.right_child.count_nodes_below(only_leaves=only_leaves)
 
-        return count
+        return ct
 
 
 class Leaf(Node):
@@ -88,7 +90,8 @@ class Decision_Tree:
     """
 
     def __init__(
-        self, max_depth=10, min_pop=1, seed=0, split_criterion="random", root=None
+        self, max_depth=10, min_pop=1, seed=0,
+        split_criterion="random", root=None
     ):
         """
         Initialize a decision tree with given maximum depth,
@@ -113,5 +116,5 @@ class Decision_Tree:
         return self.root.max_depth_below()
 
     def count_nodes(self, only_leaves=False):
-        """count nodes in decision tree"""
+        """ct nodes in decision tree"""
         return self.root.count_nodes_below(only_leaves=only_leaves)
