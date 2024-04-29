@@ -1,1 +1,1 @@
-SUpervisded learning readme
+Supervised learning readme
