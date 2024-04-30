@@ -75,13 +75,13 @@ class Neuron:
         #                       and when it predicts a probability close
         #                       to 1 to a negative instance.
         # The '1.0000001 - A' term is used to avoid division by zero errors.
-        cost = -1/m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         return cost
 
     def evaluate(self, X, Y):
         """
         Evaluates the neuron’s predictions and the cost of the network.
-        
+
         Arguments:
         X: numpy.ndarray with shape (nx, m) that contains the input data.
         Y: numpy.ndarray with shape (1, m) that contains the correct labels for the input data.
