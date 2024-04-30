@@ -17,19 +17,19 @@ class Neuron:
         self.__A = 0
 
 
-@property
-def W(self):
-    """Getter func"""
-    return self.__W
+    @property
+    def W(self):
+        """Getter func"""
+        return self.__W
 
 
-@property
-def b(self):
-    """Getter func"""
-    return self.__b
+    @property
+    def b(self):
+        """Getter func"""
+        return self.__b
 
 
-@property
-def A(self):
-    """getter func"""
-    return self.__A
+    @property
+    def A(self):
+        """getter func"""
+        return self.__A
