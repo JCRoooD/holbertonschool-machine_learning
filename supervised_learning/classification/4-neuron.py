@@ -84,14 +84,17 @@ class Neuron:
 
         Arguments:
         X: numpy.ndarray with shape (nx, m) that contains the input data.
-        Y: numpy.ndarray with shape (1, m) that contains the correct labels for the input data.
+        Y: numpy.ndarray with shape (1, m) that
+        contains the correct labels for the input data.
 
-        Returns the neuron’s prediction and the cost of the network, respectively.
+        Returns the neuron’s prediction and the
+        cost of the network, respectively.
         """
         # Get the activated output of the neuron
         A = self.forward_prop(X)
         # Calculate the cost
         cost = self.cost(Y, A)
-        # Get the predictions. If the output of the network is >= 0.5, the label is 1. Otherwise, it's 0.
+        # Get the predictions. If the output of the
+        # network is >= 0.5, the label is 1. Otherwise, it's 0.
         prediction = np.where(A >= 0.5, 1, 0)
         return prediction, cost
