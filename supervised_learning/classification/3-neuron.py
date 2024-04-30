@@ -57,23 +57,23 @@ class Neuron:
 
         Arguments:
         Y: numpy.ndarray with shape (1, m) that contains
-        the correct labels for the input data.
+        the correct labels to the input data.
 
         A: numpy.ndarray with shape (1, m) containing
-        the activated output of the neuron for each example.
+        the activated output of the neuron to each example.
 
         The function calculates the cost using
-        the formula for binary cross-entropy loss.
+        the formula to binary cross-entropy loss.
         """
         m = Y.shape[1]  # Number of examples
         # Binary cross-entropy loss is a loss function
-        #                       used for binary classification problems.
+        #                       used to binary classification problems.
         # It measures the dissimilarity between the true
         #                       label (Y) and the predicted probability (A).
         # The loss is high when the model predicts a
-        #                       probability close to 0 for a positive instance,
+        #                       probability close to 0 to a positive instance,
         #                       and when it predicts a probability close
-        #                       to 1 for a negative instance.
+        #                       to 1 to a negative instance.
         # The '1.0000001 - A' term is used to avoid division by zero errors.
         cost = -1/m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         return cost
