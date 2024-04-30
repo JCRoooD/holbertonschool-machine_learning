@@ -19,7 +19,7 @@ class Neuron:
 
         # Weights vector for the neuron
         self.__W = np.random.randn(nx).reshape(1, nx)
-        # Bias for the neuron
+        # Bias to the neuron
         self.__b = 0
         # Output of the neuron
         self.__A = 0
