@@ -26,17 +26,17 @@ class Neuron:
 
     @property
     def W(self):
-        """Getter for the weights vector"""
+        """Getter to the weights vector"""
         return self.__W
 
     @property
     def b(self):
-        """Getter for the bias"""
+        """Getter to the bias"""
         return self.__b
 
     @property
     def A(self):
-        """Getter for the output"""
+        """Getter to the output"""
         return self.__A
 
     def forward_prop(self, X):
