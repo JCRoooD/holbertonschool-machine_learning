@@ -25,18 +25,6 @@ class Neuron:
         # Output of the neuron
         self.__A = 0
 
-    def forward_prop(self, X):
-        """
-        Calculates the forward propagation of the neuron
-        Arguments:
-        X: numpy.ndarray with shape (nx, m) that contains the input data
-        """
-        # Calculate the net input
-        w_sum = np.matmul(self.__W, X) + self.__b
-        # Calculate the neuron's output
-        self.__A = 1 / (1 + np.exp(-w_sum))
-        return self.__A
-
     @property
     def W(self):
         """Getter for the weights vector"""
@@ -50,4 +38,16 @@ class Neuron:
     @property
     def A(self):
         """Getter for the output"""
+        return self.__A
+
+    def forward_prop(self, X):
+        """
+        Calculates the forward propagation of the neuron
+        Arguments:
+        X: numpy.ndarray with shape (nx, m) that contains the input data
+        """
+        # Calculate the net input
+        w_sum = np.matmul(self.__W, X) + self.__b
+        # Calculate the neuron's output
+        self.__A = 1 / (1 + np.exp(-w_sum))
         return self.__A
