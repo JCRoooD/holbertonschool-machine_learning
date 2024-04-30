@@ -8,7 +8,7 @@ class Neuron:
 
     def __init__(self, nx):
         """
-        Constructor for the neuron class
+        Constructor to the neuron class
         Arguments:
         nx: number of input features to the neuron
         """
@@ -17,7 +17,7 @@ class Neuron:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
 
-        # Weights vector for the neuron
+        # Weights vector to the neuron
         self.__W = np.random.randn(nx).reshape(1, nx)
         # Bias to the neuron
         self.__b = 0
