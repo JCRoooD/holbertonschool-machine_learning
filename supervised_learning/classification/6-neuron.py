@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Based on 5-neuron.py"""
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class Neuron:
