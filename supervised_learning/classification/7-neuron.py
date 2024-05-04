@@ -163,14 +163,14 @@ class Neuron:
             if i % step == 0 or i == iterations:
                 if verbose is True:
                     print("Cost after {} iterations: {}".format(i, cost))
-            if graph is True:
-                cost_list.append(cost)
+                if graph is True:
+                    cost_list.append(cost)
             if i < iterations:
                 self.gradient_descent(X, Y, self.__A, alpha)
 
         # Graphing
         if graph is True:
-            plt.plot(np.arange(0, iterations + 1, step), costs)
+            plt.plot(np.arange(0, iterations + 1, step), cost_list)
             plt.xlabel('iteration')  # Label the x-axis as 'iteration'
             plt.ylabel('cost')  # Label the y-axis as 'cost'
             plt.title('Training Cost')  # Title the plot as 'Training Cost'
