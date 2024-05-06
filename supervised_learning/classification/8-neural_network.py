@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Class definition for binary classification neural network"""
+"""Class definition for binary
+classification neural network"""
 import numpy as np
 
 
 class NeuralNetwork:
+    """Initializes a neural network with
+    one hidden layer for binary classification"""
     def __init__(self, nx, nodes):
-        """Initializes a neural network with
-        one hidden layer for binary classification"""
+        """constructor class"""
         # Validate input types and values
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
