@@ -7,7 +7,6 @@ import numpy as np
 class NeuralNetwork:
     """Initializes a neural network with
     one hidden layer for binary classification"""
-
     def __init__(self, nx, nodes):
         """constructor class"""
         # Validate input types and values
@@ -21,14 +20,14 @@ class NeuralNetwork:
             raise ValueError("nodes must be a positive integer")
 
         # Initialize hidden layer weights, bias, and output
-        self.W1 = np.random.randn(nodes, nx)
-        self.b1 = np.zeros((nodes, 1))
-        self.A1 = 0
+        self.__W1 = np.random.randn(nodes, nx)
+        self.__b1 = np.zeros((nodes, 1))
+        self.__A1 = 0
 
         # Initialize output neuron weights, bias, and output
-        self.W2 = np.random.randn(1, nodes)
-        self.b2 = 0
-        self.A2 = 0
+        self.__W2 = np.random.randn(1, nodes)
+        self.__b2 = 0
+        self.__A2 = 0
 
 
 @property
