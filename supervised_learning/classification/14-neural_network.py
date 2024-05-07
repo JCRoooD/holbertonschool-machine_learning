@@ -152,7 +152,7 @@ class NeuralNetwork:
             raise ValueError("alpha must be positive")
 
         # Train the neural network
-        for _ in range(iterations):
+        for a in range(iterations):
             # Forward propagation
             self.forward_prop(X)
 
