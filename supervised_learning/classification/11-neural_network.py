@@ -58,7 +58,7 @@ class NeuralNetwork:
         """Getter to activated output"""
         return self.__A2
 
-    def frward_prop(self, X):
+    def forward_prop(self, X):
         """Calculates the toward propagation of the neural network"""
         # Z1 is the dot product of weights and
         #           input data plus bias to the hidden layer
