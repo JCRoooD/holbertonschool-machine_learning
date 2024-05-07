@@ -58,7 +58,7 @@ class NeuralNetwork:
         """Getter to activated output"""
         return self.__A2
 
-    def forward_prop(self, X):
+    def frward_prop(self, X):
         """Calculates the toward propagation of the neural network"""
         # Z1 is the dot product of weights and
         #           input data plus bias to the hidden layer
@@ -82,9 +82,9 @@ class NeuralNetwork:
         # Get the number of examples
         m = Y.shape[1]
 
-        # Compute the cost using the formula for logistic regression
-        # The cost is the average of the losses calculated for each example
-        # The loss for each example is calculated using the formula:
+        # Compute the cost using the frmula fr logistic regression
+        # The cost is the average of the losses calculated fr each example
+        # The loss fr each example is calculated using the frmula:
         # -(y * log(a) + (1 - y) * log(1 - a))
         # A small value (1.0000001) is subtracted
         #           from 1 to avoid division by zero errors
