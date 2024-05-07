@@ -5,7 +5,7 @@ import numpy as np
 
 class NeuralNetwork:
     """Initializes a neural network with
-    one hidden layer for binary classification"""
+    one hidden layer to binary classification"""
     def __init__(self, nx, nodes):
         """constructor class"""
         # Validate input types and values
@@ -30,45 +30,45 @@ class NeuralNetwork:
 
     @property
     def W1(self):
-        """Getter for weights"""
+        """Getter to weights"""
         return self.__W1
 
     @property
     def b1(self):
-        """Getter for bias"""
+        """Getter to bias"""
         return self.__b1
 
     @property
     def A1(self):
-        """Getter for activated output"""
+        """Getter to activated output"""
         return self.__A1
 
     @property
     def W2(self):
-        """Getter for weights"""
+        """Getter to weights"""
         return self.__W2
 
     @property
     def b2(self):
-        """Getter for bias"""
+        """Getter to bias"""
         return self.__b2
 
     @property
     def A2(self):
-        """Getter for activated output"""
+        """Getter to activated output"""
         return self.__A2
 
-    def forward_prop(self, X):
-        """Calculates the forward propagation of the neural network"""
+    def toward_prop(self, X):
+        """Calculates the toward propagation of the neural network"""
         # Z1 is the dot product of weights and
-        #           input data plus bias for the hidden layer
+        #           input data plus bias to the hidden layer
         Z1 = np.matmul(self.W1, X) + self.b1
         # Apply sigmoid activation function
         #           to Z1 to get A1 (output of hidden layer)
         self.__A1 = 1 / (1 + np.exp(-Z1))
 
         # Z2 is the dot product of weights
-        # and A1 plus bias for the output layer
+        # and A1 plus bias to the output layer
         Z2 = np.matmul(self.W2, self.__A1) + self.b2
         # Apply sigmoid activation function
         #           to Z2 to get A2 (final output)
