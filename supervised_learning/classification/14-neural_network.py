@@ -148,7 +148,7 @@ class NeuralNetwork:
         # Validate alpha
         if not isinstance(alpha, (int, float)):
             raise TypeError("alpha must be a number")
-        if alpha < 0:
+        if alpha <= 0:
             raise ValueError("alpha must be positive")
 
         # Train the neural network
