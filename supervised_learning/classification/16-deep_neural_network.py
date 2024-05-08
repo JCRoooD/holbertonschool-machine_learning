@@ -9,29 +9,29 @@ class DeepNeuralNetwork:
     performing binary classification
     """
     def __init__(self, nx, layers):
-        """class constructor"""
+        """Class constructor"""
+        # Validate input types and values
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
         if not isinstance(layers, list) or not layers:
             raise TypeError("layers must be a list of positive integers")
-        self.L = len(layers)
-        self.cache = {}
-        self.weights = {}
+        if not all(map(lambda x: x > 0 and isinstance(x, int), layers)):
+            raise TypeError("layers must be a list of positive integers")
 
+        # Initialize attributes
+        self.L = len(layers)  # Number of layers
+        self.cache = {}  # Cache for backprop
+        self.weights = {}  # Weights dictionary
+
+        # Initialize weights using He et al. method
         for i in range(self.L):
-            # Initialize weights using He et al. method
-            # If it's the first layer, the weights are based
-            # on the number of input features nx
+            key = 'W' + str(i + 1)
             if i == 0:
-                self.weights['W' + str(i + 1)] = \
-                    np.random.randn(layers[i], nx) * np.sqrt(2/nx)
-            # Fr subsequent layers, the weights are based on the number
-            # of nodes in the previous layer
+                # First layer weights based on nx
+                self.weights[key] = np.random.randn(layers[i], nx) * np.sqrt(2/nx)
             else:
-                self.weights['W' + str(i + 1)] = \
-                    np.random.randn(layers[i], layers[i - 1]) * \
-                    np.sqrt(2/layers[i - 1])
-            # Initialize biases to 0's fr each layer
-            self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
+                # Subsequent layers' weights based on previous layer
+                self.weights[key] = np.random.randn(layers[i], layers[i - 1]) \
+                                    * np.sqrt(2/layers[i - 1])
