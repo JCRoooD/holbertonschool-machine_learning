@@ -22,7 +22,7 @@ class DeepNeuralNetwork:
 
         # Initialize attributes
         self.L = len(layers)  # Number of layers
-        self.cache = {}  # Cache for backprop
+        self.cache = {}  # Cache to backprop
         self.weights = {}  # Weights dictionary
 
         # Initialize weights using He et al. method
