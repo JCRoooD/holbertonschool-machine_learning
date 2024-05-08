@@ -35,3 +35,5 @@ class DeepNeuralNetwork:
                 # Subsequent layers' weights based on previous layer
                 self.weights[key] = np.random.randn(layers[i], layers[i - 1]) \
                                     * np.sqrt(2/layers[i - 1])
+            # Initialize biases
+            self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
