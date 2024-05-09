@@ -63,7 +63,7 @@ class DeepNeuralNetwork:
         self.__cache['A0'] = X
         # Loop over each layer
         for i in range(self.L):
-            # Generate keys for weights, biases, and activations
+            # Generate keys to weights, biases, and activations
             keyW = "W" + str(i + 1)
             keyb = "b" + str(i + 1)
             keyA = "A" + str(i)
