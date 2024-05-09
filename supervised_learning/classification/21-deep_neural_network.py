@@ -102,7 +102,7 @@ class DeepNeuralNetwork:
     def gradient_descent(self, Y, cache, alpha=0.05):
         """ 
     Performs one pass of gradient descent on the neural network.
-    
+
     Args:
         Y: numpy.ndarray with shape (1, m) that contains the correct labels
         cache: dictionary containing all intermediary values of the network
