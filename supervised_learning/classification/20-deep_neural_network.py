@@ -88,7 +88,6 @@ class DeepNeuralNetwork:
         cost = -1 / m * np.sum(calc)
         return cost
 
-
     def evaluate(self, X, Y):
         """Evaluates the neural network's predictions"""
         # Generate predictions
