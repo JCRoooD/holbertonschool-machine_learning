@@ -84,5 +84,6 @@ class DeepNeuralNetwork:
         # Number of examples
         m = Y.shape[1]
         # Compute the cost
-        cost = -np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A))) / m
+        calc = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
+        cost = -1 / m * np.sum(calc)
         return cost
