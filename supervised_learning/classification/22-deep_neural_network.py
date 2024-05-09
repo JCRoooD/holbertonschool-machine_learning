@@ -126,8 +126,7 @@ class DeepNeuralNetwork:
             self.weights['W' + str(i)] -= alpha * dW
             self.weights['b' + str(i)] -= alpha * db
 
-    def train(
-        self, X, Y, iterations=5000, alpha=0.05):
+    def train(self, X, Y, iterations=5000, alpha=0.05):
         """Trains the deep neural network"""
         # Validate the number of iterations
         if not isinstance(iterations, int):
@@ -136,7 +135,7 @@ class DeepNeuralNetwork:
             raise ValueError("iterations must be a positive integer")
         # Validate the learning rate
         if not isinstance(alpha, float):
-            raise TypeError("alpha must be a number")
+            raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
         # Perform gradient descent
