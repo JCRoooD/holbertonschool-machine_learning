@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class DeepNeuralNetwork:
     """
     defines a deep neural network
@@ -31,12 +32,13 @@ class DeepNeuralNetwork:
         for i in range(self.L):
             key = "W" + str(i + 1)
             if i == 0:
-                self.weights['W' + str(i + 1)] = \
-                    np.random.randn(layers[i], nx) * np.sqrt(2/nx)
+                self.weights["W" + str(i + 1)] = np.random.randn(
+                    layers[i], nx
+                ) * np.sqrt(2 / nx)
             else:
-                self.weights['W' + str(i + 1)] = \
-                    np.random.randn(layers[i], layers[i - 1]) * \
-                    np.sqrt(2/layers[i - 1])
+                self.weights["W" + str(i + 1)] = np.random.randn(
+                    layers[i], layers[i - 1]
+                ) * np.sqrt(2 / layers[i - 1])
             # Initialize biases
             self.weights["b" + str(i + 1)] = np.zeros((layers[i], 1))
 
@@ -171,14 +173,14 @@ class DeepNeuralNetwork:
         """Saves the instance object to a file in pickle format"""
         if not filename.endswith(".pkl"):
             filename += ".pkl"
-        with open(filename, 'wb') as file:
+        with open(filename, "wb") as file:
             pickle.dump(self, file)
 
     @staticmethod
     def load(filename):
         """Loads a pickled DeepNeuralNetwork object"""
         try:
-            with open(filename, 'rb') as file:
+            with open(filename, "rb") as file:
                 obj = pickle.load(file)
             return obj
         except FileNotFoundError:
