@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
     Class DeepNeuralNetwork : deep NN performing binary classification
