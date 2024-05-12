@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""create_layer"""
-
+"""This module defines a function  create a neuron layer
+"""
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
 
 
 def create_layer(prev, n, activation):
-    """Creates a layer for a neural network"""
-    initializer = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
+    """
+Creates a neural network layer with weights, biases, and an activation function.
+"""
+# Initialize weights with He et. al method
+initializer = tf.keras.initializers.VarianceScaling(mode='fan_avg')
 
-    layer = tf.layers.Dense(units=n, activation=activation,
-                            kernel_initializer=initializer,
-                            name='layer')
-    return layer(prev)
+# Define weights and biases
+weights = tf.Variable(initializer(shape=(int(prev.shape[1]), n)), name='weights')
+biases = tf.Variable(tf.zeros([n]), name='biases')
+
+# Compute weighted sum of inputs and apply activation function
+layer = tf.add(tf.matmul(prev, weights), biases)
