@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 """calculate_loss"""
 
 import tensorflow.compat.v1 as tf
