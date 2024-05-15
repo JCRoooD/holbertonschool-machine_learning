@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Momentum optimization algorithm"""
-import numpy as np
+
 import tensorflow as tf
 
 def create_momentum_op(alpha, beta1):
