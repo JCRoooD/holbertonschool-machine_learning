@@ -13,8 +13,10 @@ def batch_norm(Z, gamma, beta, epsilon):
 
     Parameters:
     Z (numpy.ndarray): The unactivated output of a neural network. 
-    gamma (numpy.ndarray): A numpy array used for element-wise scaling of the normalized Z.
-    beta (numpy.ndarray): A numpy array used for element-wise shifting of the normalized Z.
+    gamma (numpy.ndarray): A numpy array used for
+    element-wise scaling of the normalized Z.
+    beta (numpy.ndarray): A numpy array used for
+    element-wise shifting of the normalized Z.
     epsilon (float): A small number added for numerical stability.
 
     Returns:
