@@ -3,13 +3,14 @@
 import numpy as np
 
 
-def tanh_active(X):
+def tanh_active(Y):
     """ tanh activation function """
-    return np.tanh(X)
+    return np.tanh(Y)
 
-def softmax_active(X):
+
+def softmax_active(Y):
     """ softmax activation function """
-    return np.exp(X) / np.sum(np.exp(X), axis=0)
+    return np.exp(Y) / np.sum(np.exp(Y), axis=0)
 
 
 def dropout_forward_prop(X, weights, L, keep_prob):
@@ -25,7 +26,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         Z = np.matmul(weights[W_key], cache[A_key]) + weights[b_key]
         if i != L:
             # Apply tanh activation function and dropout
-            A = tanh_active(X)
+            A = tanh_active(Y)
             # Convert boolean to int
             random_array = np.random.rand(A.shape[0], A.shape[1])
             D = (random_array < keep_prob).astype(int)
@@ -34,7 +35,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
             cache["D" + str(i)] = D
         else:
             # Apply softmax activation function
-            A = softmax_active(X)
+            A = softmax_active(Y)
         cache["A" + str(i)] = A
 
     return cache
