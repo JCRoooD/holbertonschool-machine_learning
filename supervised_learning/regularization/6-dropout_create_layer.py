@@ -12,13 +12,15 @@ def dropout_create_layer(prev, n, activation, keep_prob, training=True):
         Returns: output of the new layer
     """
     # Initialize the weights using a kernel initializer
+    # VarianceScaling initializer is used to scale the weights based on the mode provided
     init = tf.keras.initializers.VarianceScaling(scale=2.0, mode='fan_avg')
 
-    # Create Dense layer
-    dense = tf.keras.layers.Dense(units=n, activation=activation,
-                                  kernel_initializer=init)
+    # Create a Dense layer with 'n' units and the specified activation function
+    # The weights are initialized using the VarianceScaling initializer
+    dense = tf.keras.layers.Dense(units=n, activation=activation, kernel_initializer=init)
 
-    # Apply dropout
+    # Apply dropout to the Dense layer
+    # Dropout randomly sets a fraction 'rate' of input units to 0 at each update during training, which helps prevent overfitting.
     dropout = tf.nn.dropout(dense(prev), rate=1-keep_prob)
 
     return dropout
