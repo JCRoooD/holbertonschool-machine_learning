@@ -31,31 +31,32 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     db (numpy.ndarray): Gradient of the cost with respect to the biases of the
                        current layer (b). Shape (1, 1, 1, knc)
     """
+    m, h_new, w_new, c_new = dZ.shape
     m, h_prev, w_prev, c_prev = A_prev.shape
-    kh, kw, kc, knc = W.shape
+    kh, kw, _, _ = W.shape
     sh, sw = stride
-    m, h, w, c = dZ.shape
-    ph, pw = 0, 0
+
     if padding == 'same':
-        ph = int(np.ceil(((h_prev - 1) * sh + kh - h_prev) / 2))
-        pw = int(np.ceil(((w_prev - 1) * sw + kw - w_prev) / 2))
+        ph = ((h_prev - 1) * sh + kh - h_prev) // 2 + 1
+        pw = ((w_prev - 1) * sw + kw - w_prev) // 2 + 1
+    else:  # padding == 'valid':
+        ph = pw = 0
+
+    A_prev_pad = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)), 'constant')
+    dA_prev_pad = np.zeros_like(A_prev_pad)
+    dW = np.zeros_like(W)
+    db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
+
+    for i in range(h_new):
+        for j in range(w_new):
+            for k in range(c_new):
+                slice_A_prev = A_prev_pad[:, i*sh:i*sh+kh, j*sw:j*sw+kw, :]
+                dA_prev_pad[:, i*sh:i*sh+kh, j*sw:j*sw+kw, :] += W[..., k] * dZ[:, i, j, k, np.newaxis, np.newaxis, np.newaxis]
+                dW[..., k] += np.sum(slice_A_prev * dZ[:, i, j, k, np.newaxis, np.newaxis, np.newaxis], axis=0)
+
     if padding == 'same':
-        A_prev = np.pad(A_prev, ((0, 0), (ph, ph), (pw, pw), (0, 0)),
-                        mode='constant', constant_values=0)
-    dA_prev = np.zeros(A_prev.shape)
-    dW = np.zeros(W.shape)
-    db = np.zeros(b.shape)
-    for i in range(h):
-        for j in range(w):
-            for k in range(knc):
-                dA_prev[:,
-                        i * sh: i * sh + kh,
-                        j * sw: j * sw + kw,
-                        :] += W[:, :, :, k] * dZ[:, i, j, k][:, None, None, None]
-                for m in range(A_prev.shape[0]):  # iterate over the number of examples
-                    dW[:, :, :, k] += A_prev[m,
-                                            i * sh: i * sh + kh,
-                                            j * sw: j * sw + kw,
-                                            :] * dZ[m, i, j, k]
-                db[:, :, :, k] += dZ[:, i, j, k]
+        dA_prev = dA_prev_pad[:, ph:-ph, pw:-pw, :]
+    else:  # padding == 'valid':
+        dA_prev = dA_prev_pad
+
     return dA_prev, dW, db
