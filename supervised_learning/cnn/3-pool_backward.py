@@ -4,24 +4,25 @@ import numpy as np
 
 
 def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
-    """ Performs backward propagation over a pooling layer of a neural network
+    """
+    Performs backward propagation over a pooling layer of a neural network
 
     Parameters:
-    dA (numpy.ndarray): Gradient of the cost with respect to the output of the pooling layer.
-                        Shape (m, h_new, w_new, c) where m is the number of examples, h_new
-                        and w_new are the height and width of the output, and c is the number
+    dA (numpy.ndarray): Gradient of the cost with respect to the output of
+                        the pooling layer. Shape (m, h_new, w_new, c) where m
+                        is the number of examples, h_new and w_new are the
+                        height and width of the output, and c is the number
                         of channels.
-    A_prev (numpy.ndarray): Output from the previous layer. Shape (m, h_prev, w_prev, c)
-                            where m is the number of examples, h_prev and w_prev are the
-                            height and width of the previous layer, and c is the number of
-                            channels.
-    kernel_shape (tuple): Tuple of (kh, kw) representing kernel height and width.
+    A_prev (numpy.ndarray): Output from the previous layer. Shape (m, h_prev,
+                            w_prev, c) where m is the number of examples,
+                            h_prev and w_prev are the height and width of the
+                            previous layer, and c is the number of channels.
+    kernel_shape (tuple): Tuple of (kh, kw) representing kernel height and
+                          width.
     stride (tuple): Tuple of (sh, sw) representing stride height and width.
     mode (str): Type of pooling used, either 'max' or 'avg'.
 
     Returns:
-    dA_prev (numpy.ndarray): Gradient of the cost with respect to the output of the
-                            previous layer (A_prev). Shape (m, h_prev, w_prev, c)
     """
     m, h_new, w_new, c = dA.shape
     _, h_prev, w_prev, _ = A_prev.shape
