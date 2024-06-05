@@ -12,7 +12,8 @@ def lenet5(X):
             m is the number of images
 
     Returns:
-        a K.Model compiled to use Adam optimization (with default hyperparameters)
+        a K.Model compiled to use Adam
+        optimization (with default hyperparameters)
         a tensor for the softmax activated output
     """
     init = K.initializers.he_normal(seed=0)
