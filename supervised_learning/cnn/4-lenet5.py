@@ -1,60 +1,64 @@
 #!/usr/bin/env python3
 """LeNet-5 architecture"""
-import tensorflow.compat.v1 as tf 
+import tensorflow.compat.v1 as tf
+
 
 def lenet5(x, y):
-    """
-    Builds a modified version of the LeNet-5 architecture using tensorflow
-
-    Args:
-        x (tf.placeholder): Placeholder for the input images, shape (m, 28, 28, 1)
-        y (tf.placeholder): Placeholder for the one-hot labels, shape (m, 10)
-
-    Returns:
-        output (tf.Tensor): Softmax activated output
-        train_op (tf.Operation): Adam optimizer training operation
-        loss (tf.Tensor): Loss of the network
-        accuracy (tf.Tensor): Accuracy of the network
-    """
-    # He normal initializer
+    """Builds a modified version of the
+    LeNet-5 architecture using tensorflow"""
     init = tf.keras.initializers.VarianceScaling(scale=2.0)
 
-    # First Convolutional layer
-    W1 = tf.Variable(init([5, 5, 1, 6]))
-    b1 = tf.Variable(tf.zeros([6]))
-    conv1 = tf.nn.conv2d(x, W1, strides=[1, 1, 1, 1], padding='SAME')
-    conv1 = tf.nn.bias_add(conv1, b1)
-    conv1 = tf.nn.relu(conv1)
-    # First Max pooling layer
-    pool1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
+    # Convolutional layer with 6 kernels of shape 5x5 with same padding
+    conv1 = tf.layers.conv2d(
+        x,
+        filters=6,
+        kernel_size=5,
+        padding="same",
+        activation=tf.nn.relu,
+        kernel_initializer=init,
+    )
 
-    # Second Convolutional layer
-    W2 = tf.Variable(init([5, 5, 6, 16]))
-    b2 = tf.Variable(tf.zeros([16]))
-    conv2 = tf.nn.conv2d(pool1, W2, strides=[1, 1, 1, 1], padding='VALID')
-    conv2 = tf.nn.bias_add(conv2, b2)
-    conv2 = tf.nn.relu(conv2)
-    # Second Max pooling layer
-    pool2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='VALID')
+    # Max pooling layer with kernels of shape 2x2 with 2x2 strides
+    pool1 = tf.layers.max_pooling2d(conv1, pool_size=[2, 2], strides=2)
 
-    # Flatten the output
+    # Convolutional layer with 16 kernels of shape 5x5 with valid padding
+    conv2 = tf.layers.conv2d(
+        pool1,
+        filters=16,
+        kernel_size=5,
+        padding="valid",
+        activation=tf.nn.relu,
+        kernel_initializer=init,
+    )
+
+    # Max pooling layer with kernels of shape 2x2 with 2x2 strides
+    pool2 = tf.layers.max_pooling2d(conv2, pool_size=[2, 2], strides=2)
+
+    # Flatten the pool2 output
     flat = tf.layers.flatten(pool2)
 
-    # First Fully connected layer
-    fc1 = tf.layers.dense(flat, units=120, activation=tf.nn.relu, kernel_initializer=init)
-    # Second Fully connected layer
-    fc2 = tf.layers.dense(fc1, units=84, activation=tf.nn.relu, kernel_initializer=init)
+    # Fully connected layer with 120 nodes
+    fc1 = tf.layers.dense(
+        flat, units=120, activation=tf.nn.relu, kernel_initializer=init
+    )
 
-    # Output layer
-    output = tf.layers.dense(fc2, units=10, activation=tf.nn.softmax, kernel_initializer=init)
-    
-    # Loss function
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=output))
+    # Fully connected layer with 84 nodes
+    fc2 = tf.layers.dense(fc1, units=84,
+                          activation=tf.nn.relu, kernel_initializer=init)
+
+    # Fully connected softmax output layer with 10 nodes
+    softmax = tf.layers.dense(
+        fc2, units=10, activation=tf.nn.softmax, kernel_initializer=init
+    )
+
+    # Loss
+    loss = tf.losses.softmax_cross_entropy(y, softmax)
+
     # Training operation
     train_op = tf.train.AdamOptimizer().minimize(loss)
 
-    # Accuracy calculation
-    correct_prediction = tf.equal(tf.argmax(output, 1), tf.argmax(y, 1))
+    # Accuracy
+    correct_prediction = tf.equal(tf.argmax(softmax, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    
-    return output, train_op, loss, accuracy
+
+    return softmax, train_op, loss, accuracy
