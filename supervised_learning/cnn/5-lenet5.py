@@ -15,26 +15,44 @@ def lenet5(X):
         a K.Model compiled to use Adam optimization (with default hyperparameters)
         a tensor for the softmax activated output
     """
-    init = K.initializers.he_normal(seed=None)
+    init = K.initializers.he_normal(seed=0)
 
-    conv1 = K.layers.Conv2D(filters=6, kernel_size=(5, 5), padding='same',
-                             activation='relu', kernel_initializer=init)(X)
-    pool1 = K.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv1)
+    # Convolutional layer with 6 kernels of shape 5x5 with same padding
+    conv1 = K.layers.Conv2D(filters=6,
+                            kernel_size=5, padding='same',
+                            activation='relu', kernel_initializer=init)(X)
 
-    conv2 = K.layers.Conv2D(filters=16, kernel_size=(5, 5), padding='valid',
-                             activation='relu', kernel_initializer=init)(pool1)
-    pool2 = K.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv2)
+    # Max pooling layer with kernels of shape 2x2 with 2x2 strides
+    pool1 = K.layers.MaxPooling2D(pool_size=[2, 2], strides=2)(conv1)
 
-    flatten = K.layers.Flatten()(pool2)
+    # Convolutional layer with 16 kernels of shape 5x5 with valid padding
+    conv2 = K.layers.Conv2D(filters=16, kernel_size=5,
+                            padding='valid', activation='relu',
+                            kernel_initializer=init)(pool1)
 
+    # Max pooling layer with kernels of shape 2x2 with 2x2 strides
+    pool2 = K.layers.MaxPooling2D(pool_size=[2, 2], strides=2)(conv2)
+
+    # Flatten the pool2 output
+    flat = K.layers.Flatten()(pool2)
+
+    # Fully connected layer with 120 nodes
     fc1 = K.layers.Dense(units=120, activation='relu',
-                         kernel_initializer=init)(flatten)
+                         kernel_initializer=init)(flat)
+
+    # Fully connected layer with 84 nodes
     fc2 = K.layers.Dense(units=84, activation='relu',
                          kernel_initializer=init)(fc1)
-    output = K.layers.Dense(units=10, kernel_initializer=init)(fc2)
 
-    model = K.Model(inputs=X, outputs=output)
-    model.compile(optimizer='adam', loss='categorical_crossentropy',
-                  metrics=['accuracy'])
+    # Fully connected softmax output layer with 10 nodes
+    softmax = K.layers.Dense(units=10, activation='softmax',
+                             kernel_initializer=init)(fc2)
+
+    # Create model
+    model = K.Model(inputs=X, outputs=softmax)
+
+    # Compile model
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy', metrics=['accuracy'])
 
     return model
