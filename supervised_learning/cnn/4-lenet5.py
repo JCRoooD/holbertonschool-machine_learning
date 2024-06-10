@@ -50,7 +50,7 @@ def lenet5(x, y):
 
     # Fully connected softmax output layer with 10 nodes
     logic = tf.layers.dense(
-        fc2, units=10, activation=tf.nn.relu, kernel_initializers=init
+        fc2, units=10, kernel_initializers=init
     )
 
     # Loss
