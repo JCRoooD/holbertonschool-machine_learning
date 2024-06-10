@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """LeNet-5 architecture"""
-import tensorflow.compat.v1 as tf
+import tensorflow.compat.v1 as tf # type: ignore
+
+tf.disable_v2_behavior()
 
 
 def lenet5(x, y):
