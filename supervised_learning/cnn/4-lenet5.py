@@ -45,7 +45,8 @@ def lenet5(x, y):
     )
 
     # Fully connected layer with 84 nodes
-    fc2 = tf.layers.dense(fc1, units=84, activation=tf.nn.relu, kernel_initializer=init)
+    fc2 = tf.layers.dense(fc1, units=84, activation=tf.nn.relu,
+                          kernel_initializer=init)
 
     # Fully connected softmax output layer with 10 nodes
     logic = tf.layers.dense(fc2, units=10, kernel_initializer=init)
