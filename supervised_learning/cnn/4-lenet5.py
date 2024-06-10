@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """LeNet-5 architecture"""
-import tensorflow.compat.v1 as tf # type: ignore
+import tensorflow.compat.v1 as tf  # type: ignore
 
 tf.disable_v2_behavior()
 
@@ -45,13 +45,10 @@ def lenet5(x, y):
     )
 
     # Fully connected layer with 84 nodes
-    fc2 = tf.layers.dense(fc1, units=84,
-                          activation=tf.nn.relu, kernel_initializer=init)
+    fc2 = tf.layers.dense(fc1, units=84, activation=tf.nn.relu, kernel_initializer=init)
 
     # Fully connected softmax output layer with 10 nodes
-    logic = tf.layers.dense(
-        fc2, units=10, kernel_initializer=init
-    )
+    logic = tf.layers.dense(fc2, units=10, kernel_initializer=init)
 
     # Loss
     loss = tf.losses.softmax_cross_entropy(y, logic)
