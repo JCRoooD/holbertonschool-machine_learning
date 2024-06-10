@@ -14,7 +14,7 @@ def projection_block(A_prev, filters, s=2):
         kernel_size=1,
         strides=s,
         padding='same',
-        activation='relu',
+        activation='linear',
         kernel_initializer=K.initializers.he_normal(seed=None)
     )(A_prev)
 
@@ -25,7 +25,7 @@ def projection_block(A_prev, filters, s=2):
         filters=F3,
         kernel_size=3,
         padding='same',
-        activation='relu',
+        activation='linear',
         kernel_initializer=K.initializers.he_normal(seed=None)
     )(conv1)
 
@@ -36,7 +36,7 @@ def projection_block(A_prev, filters, s=2):
         filters=F12,
         kernel_size=1,
         padding='same',
-        activation='relu',
+        activation='linear',
         kernel_initializer=K.initializers.he_normal(seed=None)
     )(conv2)
 
