@@ -12,8 +12,8 @@ def identity_block(A_prev, filters):
         filters=F11,
         kernel_size=1,
         padding='same',
-        activation='relu',
-        kernel_initializer=K.initializers.he_normal(seed=0)
+        activation='linear',
+        kernel_initializer=K.initializers.he_normal(seed=None)
     )(A_prev)
 
     conv1 = K.layers.BatchNormalization(axis=3)(conv1)
@@ -23,8 +23,8 @@ def identity_block(A_prev, filters):
         filters=F3,
         kernel_size=3,
         padding='same',
-        activation='relu',
-        kernel_initializer=K.initializers.he_normal(seed=0)
+        activation='linear',
+        kernel_initializer=K.initializers.he_normal(seed=None)
     )(conv1)
 
     conv2 = K.layers.BatchNormalization(axis=3)(conv2)
@@ -34,14 +34,14 @@ def identity_block(A_prev, filters):
         filters=F12,
         kernel_size=1,
         padding='same',
-        activation='relu',
-        kernel_initializer=K.initializers.he_normal(seed=0)
+        activation='linear',
+        kernel_initializer=K.initializers.he_normal(seed=None)
     )(conv2)
 
     conv3 = K.layers.BatchNormalization(axis=3)(conv3)
-    conv3 = K.layers.Activation('relu')(conv3)
 
     output = K.layers.Add()([conv3, A_prev])
+
     output = K.layers.Activation('relu')(output)
 
     return output
