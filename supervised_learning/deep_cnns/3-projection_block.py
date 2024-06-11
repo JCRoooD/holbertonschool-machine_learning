@@ -9,52 +9,45 @@ def projection_block(A_prev, filters, s=2):
     Deep Residual Learning for Image Recognition (2015)"""
     F11, F3, F12 = filters
 
-    conv1 = K.layers.Conv2D(
+    x_shortcut = K.layers.Conv2D(
+        filters=F12,
+        kernel_size=1,
+        strides=s,
+        padding='same',
+        kernel_initializer='he_normal'
+    )(A_prev)
+    x_shortcut = K.layers.BatchNormalization()(x_shortcut)
+
+    X = K.layers.Conv2D(
         filters=F11,
         kernel_size=1,
         strides=s,
         padding='same',
-        activation='linear',
-        kernel_initializer=K.initializers.he_normal(seed=None)
+        kernel_initializer='he_normal'
     )(A_prev)
+    X = K.layers.BatchNormalization()(X)
+    X = K.layers.Activation('relu')(X)
 
-    conv1 = K.layers.BatchNormalization(axis=3)(conv1)
-    conv1 = K.layers.Activation('relu')(conv1)
-
-    conv2 = K.layers.Conv2D(
+    X = K.layers.Conv2D(
         filters=F3,
         kernel_size=3,
+        strides=1,
         padding='same',
-        activation='linear',
-        kernel_initializer=K.initializers.he_normal(seed=None)
-    )(conv1)
+        kernel_initializer='he_normal'
+    )(X)
+    X = K.layers.BatchNormalization()(X)
+    X = K.layers.Activation('relu')(X)
 
-    conv2 = K.layers.BatchNormalization(axis=3)(conv2)
-    conv2 = K.layers.Activation('relu')(conv2)
-
-    conv3 = K.layers.Conv2D(
+    X = K.layers.Conv2D(
         filters=F12,
         kernel_size=1,
+        strides=1,
         padding='same',
-        activation='linear',
-        kernel_initializer=K.initializers.he_normal(seed=None)
-    )(conv2)
+        kernel_initializer='he_normal'
+    )(X)
+    X = K.layers.BatchNormalization()(X)
 
-    conv3 = K.layers.BatchNormalization(axis=3)(conv3)
+    X = K.layers.Add()([X, x_shortcut])
+    X = K.layers.Activation('relu')(X)
 
-    conv4 = K.layers.Conv2D(
-        filters=F12,
-        kernel_size=1,
-        strides=s,
-        padding='same',
-        activation='linear',
-        kernel_initializer=K.initializers.he_normal(seed=None)
-    )(A_prev)
-
-    conv4 = K.layers.BatchNormalization(axis=3)(conv4)
-
-    output = K.layers.Add()([conv3, conv4])
-
-    output = K.layers.Activation('relu')(output)
-
-    return output
+    return X
