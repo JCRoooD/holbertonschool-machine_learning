@@ -8,40 +8,32 @@ def identity_block(A_prev, filters):
     Deep Residual Learning for Image Recognition (2015)"""
     F11, F3, F12 = filters
 
-    #input value for the shortcut
+    # Save the input value for the shortcut
     X_shortcut = A_prev
 
-    X = K.layers.Conv2D(
-        filters=F11,
-        kernel_size=1,
-        padding='same',
-        kernel_initializer='he_normal'
-    )(A_prev)
-
-    X = K.layers.BatchNormalization()(X)
+    # First component of main path
+    X = K.layers.Conv2D(filters=F11, kernel_size=(1, 1),
+                        strides=(1, 1), padding='valid',
+                        kernel_initializer=K.initializers.he_normal(seed=0)
+                        )(A_prev)
+    X = K.layers.BatchNormalization(axis=3)(X)
     X = K.layers.Activation('relu')(X)
 
-    X = K.layers.Conv2D(
-        filters=F3,
-        kernel_size=3,
-        padding='same',
-        kernel_initializer='he_normal'
-    )(X)
-
-    X = K.layers.BatchNormalization()(X)
+    # Second component of main path
+    X = K.layers.Conv2D(filters=F3, kernel_size=(3, 3),
+                        strides=(1, 1), padding='same',
+                        kernel_initializer=K.initializers.he_normal(seed=0))(X)
+    X = K.layers.BatchNormalization(axis=3)(X)
     X = K.layers.Activation('relu')(X)
 
-    X = K.layers.Conv2D(
-        filters=F12,
-        kernel_size=1,
-        padding='same',
-        kernel_initializer='he_normal'
-    )(X)
+    # Third component of main path
+    X = K.layers.Conv2D(filters=F12, kernel_size=(1, 1), strides=(1, 1),
+                        padding='valid',
+                        kernel_initializer=K.initializers.he_normal(seed=0))(X)
+    X = K.layers.BatchNormalization(axis=3)(X)
 
-    X = K.layers.BatchNormalization()(X)
-
+    # Add shortcut value to main path, and pass it through a RELU activation
     X = K.layers.Add()([X, X_shortcut])
-
     X = K.layers.Activation('relu')(X)
 
     return X
