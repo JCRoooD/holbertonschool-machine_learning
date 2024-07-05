@@ -176,7 +176,7 @@ class Yolo:
         # Iterate over the outputs
         for box_confidence, box_class_prob, box in zip(
                 box_confidences, box_class_probs, boxes):
-            
+
             box_scores_per_output = box_confidence * box_class_prob
 
             # For each box, keep the max score
