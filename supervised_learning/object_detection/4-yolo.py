@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 import tensorflow.keras as K
 from tensorflow.keras.activations import sigmoid  # type: ignore
+import cv2
 
 
 class Yolo:
@@ -300,7 +301,7 @@ class Yolo:
         import os
 
         images = []
-        image_paths = []
+        images_paths = []
 
         for file in os.listdir(folder_path):
             image_path = os.path.join(folder_path, file)
@@ -309,4 +310,4 @@ class Yolo:
                 image = cv2.imread(image_path)
             if image is not None:
                 images.append(image)
-        return images, image_paths
+        return images, images_paths
