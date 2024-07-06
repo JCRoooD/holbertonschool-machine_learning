@@ -313,7 +313,7 @@ class Yolo:
         return images, images_paths
 
     def preprocess_images(self, images):
-        """process image function 
+        """process image function
         Args:
             images: a list of images as numpy.ndarrays
         Returns: a tuple of (pimages, image_shapes):
