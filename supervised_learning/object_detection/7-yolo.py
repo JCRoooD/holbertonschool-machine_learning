@@ -384,16 +384,38 @@ class Yolo:
             all the images to predict
         Returns: None
         """
+        predictions = []
+
+        # Load and preprocess images
         images, image_paths = self.load_images(folder_path)
         pimages, image_shapes = self.preprocess_images(images)
-        outputs = self.model.predict(pimages)
-        for i, output in enumerate(outputs):
+
+        # Predict objects in images using the YOLO model
+        all_outputs = self.model.predict(pimages)
+
+        for i in range(len(images)):
+            # Process model output for each image
+            outputs = [all_outputs[x][i, ...] for x in range(len(all_outputs))]
             boxes, box_confidences, box_class_probs = self.process_outputs(
-                output, image_shapes[i])
+                outputs, image_shapes[i])
+
+            # Filter and apply non-max suppression on the detected boxes
             filtered_boxes, box_classes, box_scores = self.filter_boxes(
                 boxes, box_confidences, box_class_probs)
             box_predictions, predicted_box_classes, predicted_box_scores = \
-                self.non_max_suppression(filtered_boxes, box_classes, box_scores)
-            self.show_boxes(images[i], box_predictions, predicted_box_classes,
-                            predicted_box_scores, image_paths[i])
+                self.non_max_suppression(
+                    filtered_boxes, box_classes, box_scores)
 
+            # Extract file name from image path
+            file_name = image_paths[i].split('/')[-1]
+
+            # Store predictions for current image
+            predictions.append((box_predictions,
+                                predicted_box_classes, predicted_box_scores))
+
+            # Display image with bounding boxes
+            self.show_boxes(images[i], box_predictions,
+                            predicted_box_classes,
+                            predicted_box_scores, file_name)
+
+        return predictions, image_paths
