@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """calculate the cofactor of a matrix"""
-minor = __import__('1-minor').minor
+minor = __import__("1-minor").minor
 
 
 def cofactor(matrix):
     """calculates the cofactor matrix of a matrix
-        Args:
-        matrix (list of lists): the matrix to calculate
-        Returns:    
-        the cofactor matrix of the matrix
+    Args:
+    matrix (list of lists): the matrix to calculate
+    Returns:
+    the cofactor matrix of the matrix
     """
     # Check if matrix is a list of lists
     # Check if matrix is a list of lists

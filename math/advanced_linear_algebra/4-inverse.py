@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""" 4. Inverse matrix"""
+""" 4. Inverse matrix"""
+determinant = __import__('0-determinant').determinant
 adjugate = __import__('3-adjugate').adjugate
-determinant = __import__('5-determinant').determinant
 
 
 def inverse(matrix):
-    """Calculates the inverse of a matrix
-        Args:
-        matrix: A list of lists whose inverse should be calculated
-        Returns: The inverse of the
-        matrix or None if the matrix is singular
+    """Args:
+        matrix: list of lists whose inverse should be calculated
+    Returns:
+        the inverse of a matrix
     """
     if not isinstance(matrix, list):
         raise TypeError("matrix must be a list of lists")
@@ -32,12 +31,12 @@ def inverse(matrix):
     if detA == 0:
         return None
 
-    adjugateZ = adjugate(matrix)
+    adjugateA = adjugate(matrix)
     # Iterate over the rowns and columns
     # of the adjugate matrix
     for row in range(len(matrix)):
         for col in range(len(matrix)):
             # Divide each element of the adjugate matrix
             # by the determinant of the matrix
-            adjugateZ[row][col] /= detA
-    return adjugateZ
+            adjugateA[row][col] /= detA
+    return adjugateA
