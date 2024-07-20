@@ -6,7 +6,7 @@ def determinant(matrix):
     """calculates the determinant of a matrix
         Args:
         matrix (list of lists): the matrix to calculate
-        Returns:    
+        Returns:
         the determinant of the matrix
     """
     # Check if matrix is a list of lists
