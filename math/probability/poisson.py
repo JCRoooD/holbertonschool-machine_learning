@@ -27,9 +27,11 @@ class Poisson:
         Args:
             k (int): The number of “successes”
             Returns:
-        """ 
+        """
+        e = 2.7182818285
+
         if not isinstance(k, int):
-                k = int(k)
+            k = int(k)
 
         # The PMF is 0 for negative values of k, as negative
         # successes are not possible.
