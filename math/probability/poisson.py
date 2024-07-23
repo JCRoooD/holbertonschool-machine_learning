@@ -78,10 +78,10 @@ class Poisson:
             # (from 0 to k) and adds it to the CDF value.
             for i in range(k + 1):
                 # Initialize the factorial value for the current i.
-                # Factorial is used in the denominator of the Poisson PMF formula.
+                # Factorial is used in the denominator of the Poisson PMF
                 factorial = 1
                 # Calculate the factorial of i (i!).
-                # This inner loop multiplies 1 by all integers up to i to get i!.
+                # This inner loop multiplies 1 by all integers to i to get i!
                 for j in range(1, i + 1):
                     factorial *= j
 
