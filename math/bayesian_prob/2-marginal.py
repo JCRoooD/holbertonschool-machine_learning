@@ -5,10 +5,6 @@ import numpy as np
 
 def marginal(x, n, P, Pr):
     """Calculates the marginal probability of obtaining the data"""
-    if not isinstance(n, int) or n <= 0:
-        raise ValueError("n must be a positive integer")
-    if not isinstance(x, int) or x < 0:
-        raise ValueError("x must be an integer that is greater than or equal to 0")
     if x > n:
         raise ValueError("x cannot be greater than n")
     if not isinstance(P, np.ndarray) or len(P.shape) != 1:
@@ -24,7 +20,11 @@ def marginal(x, n, P, Pr):
     if not np.isclose(np.sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
 
-    # Calculate the intersection of obtaining x and n with each probability in P
-    intersection_values = np.sum(likelihood(x, n, P) * Pr)
+    # Calculate the likelihood of the data for each probability in P
+    factorial = np.math.factorial
+    likelihood = (factorial(n) / (factorial(x) * factorial(n - x))) * (P ** x) * ((1 - P) ** (n - x))
 
-    return intersection_values
+    # Calculate the marginal probability
+    marginal_prob = np.sum(likelihood * Pr)
+
+    return marginal_prob
