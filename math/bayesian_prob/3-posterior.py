@@ -22,10 +22,14 @@ def posterior(x, n, P, Pr):
     if not np.isclose(np.sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
 
-    # Calculate the marginal probability of obtaining the data
-    marginal_prob = np.sum(likelihood(x, n, P) * Pr)
+    # Calculate the likelihood of the data for each probability in P
+    factorial = np.math.factorial
+    likelihood = (factorial(n) / (factorial(x) * factorial(n - x))) * (P ** x) * ((1 - P) ** (n - x))
 
-    # Calculate the posterior probability of each probability in P
-    posterior_prob = (likelihood(x, n, P) * Pr) / marginal_prob
+    # Calculate the marginal probability
+    marginal_prob = np.sum(likelihood * Pr)
+
+    # Calculate the posterior probability
+    posterior_prob = (likelihood * Pr) / marginal_prob
 
     return posterior_prob
