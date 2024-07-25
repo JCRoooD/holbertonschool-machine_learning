@@ -21,7 +21,11 @@ def likelihood(x, n, P):
         raise TypeError("P must be a 1D numpy.ndarray")
     if np.any(P < 0) or np.any(P > 1):
         raise ValueError("All values in P must be in the range [0, 1]")
-    fact = np.math.factorial
-    comb = fact(n) / (fact(x) * fact(n - x))
-    likelihood = comb * (P ** x) * ((1 - P) ** (n - x))
-    return likelihood
+
+    # Calculate the binomial coefficient using numpy
+    comb = np.math.factorial(n) / (np.math.factorial(x) * np.math.factorial(n - x))
+    
+    # Calculate the likelihood for each probability in P
+    likelihoods = comb * (P ** x) * ((1 - P) ** (n - x))
+    
+    return likelihoods
