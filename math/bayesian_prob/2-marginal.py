@@ -5,6 +5,10 @@ import numpy as np
 
 def marginal(x, n, P, Pr):
     """Calculates the marginal probability of obtaining the data"""
+    if not isinstance(n, int) or n <= 0:
+        raise ValueError("n must be a positive integer")
+    if not isinstance(x, int) or x < 0:
+        raise ValueError("x must be a nonnegative integer")
     if x > n:
         raise ValueError("x cannot be greater than n")
     if not isinstance(P, np.ndarray) or len(P.shape) != 1:
