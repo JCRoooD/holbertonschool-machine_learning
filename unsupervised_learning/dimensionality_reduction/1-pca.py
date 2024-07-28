@@ -12,11 +12,15 @@ def pca(X, ndim):
         Returns: T, a np.ndarray of shape (n, ndim) with the transformed X
     """
     X = X - np.mean(X, axis=0)
-
-    # Compute the SVD:
+    
+    # Perform SVD
     U, S, Vt = np.linalg.svd(X)
+    
+    # Compute the weights matrix
+    W = Vt[:ndim].T
+    
+    # Transform the data
+    T = np.matmul(X, W)
+    
+    return T
 
-    # Compute the cumulative sum of the explained variance ratio
-    tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
-
-    return tr

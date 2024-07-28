@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" PCA"""
+""" PCA module"""
 import numpy as np
 
 
@@ -13,7 +13,7 @@ def pca(X, var=0.95):
        All dimensions have a mean of 0 across all data points.
     var: float
          Fraction of the variance that the PCA transformation should maintain.
-
+```
     Returns:
     W: np.ndarray of shape (d, nd)
        Weights matrix that maintains var fraction of X's original variance.
