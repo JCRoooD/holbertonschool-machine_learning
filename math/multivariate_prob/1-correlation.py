@@ -1,4 +1,4 @@
-#!/usr/bim/env python3
+#!/usr/bin/env python3
 """ calculates correlation matrix """
 import numpy as np
 
