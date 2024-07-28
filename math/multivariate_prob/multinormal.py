@@ -25,4 +25,4 @@ class MultiNormal:
         x_m = x - self.mean
         pdf = 1 / np.sqrt(((2 * np.pi) ** n) * np.linalg.det(self.cov)) * np.exp(
             -0.5 * np.dot(np.dot(x_m.T, np.linalg.inv(self.cov)), x_m))
-        return pdf
+        return pdf.item()
