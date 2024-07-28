@@ -113,7 +113,8 @@ def marginal(x, n, P, Pr):
 
 
 def posterior(x, n, P, Pr):
-    """Calculates the posterior probability of developing severe side effects"""
+    """Calculates the posterior probability
+    of developing severe side effects"""
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
     if not isinstance(x, int) or x <= 0:
