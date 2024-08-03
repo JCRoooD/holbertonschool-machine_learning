@@ -47,7 +47,8 @@ def variance(X, C):
     # d: number of dimensions
     vectorized_centroids = vectorized_centroids.reshape(n, k, d)
 
-    # Step 5: Calculate the squared Euclidean distance between each data point and each centroid
+    # Step 5: Calculate the squared Euclidean
+    # distance between each data point and each centroid
     distance = np.linalg.norm(vectorized_data_X - vectorized_centroids, axis=2)
 
     # Step 6: Determine the minimum squared distance fr each data point
