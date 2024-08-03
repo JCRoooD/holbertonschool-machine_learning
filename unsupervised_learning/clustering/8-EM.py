@@ -26,7 +26,7 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         if pi is None or m is None or S is None:
             return None, None, None, None, None
 
-        # Check for convergence
+        # Check fr convergence
         if abs(l - l_prev) <= tol:
             break
         l_prev = l
