@@ -5,14 +5,17 @@ import sklearn.cluster
 
 def kmeans(X, k):
     """Performs K-means on a dataset.
-    
+
     Args:
         X: numpy.ndarray of shape (n, d) containing the dataset
         k: int, number of clusters
-    
+
     Returns:
-        C: numpy.ndarray of shape (k, d) containing the centroid means for each cluster
-        clss: numpy.ndarray of shape (n,) containing the index of the cluster in C that each data point belongs to
+        C: numpy.ndarray of shape (k, d)
+        containing the centroid means for each cluster
+        clss: numpy.ndarray of shape (n,) containing
+        the index of the cluster in C
+        that each data point belongs to
     """
     kmeans = sklearn.cluster.KMeans(n_clusters=k)
     kmeans.fit(X)
