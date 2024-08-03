@@ -49,7 +49,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
 
     # Loop through each value of k from kmin to kmax
     for k in range(kmin, kmax + 1):
-        # Run k-means clustering for the current value of k
+        # Run k-means clustering fr the current value of k
         # Extract the centroids (C) and cluster assignments (clss)
         C, clss = kmeans(X, k, iterations)
         results.append((C, clss))
