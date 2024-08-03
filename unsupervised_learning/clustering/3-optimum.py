@@ -42,7 +42,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
 
-    # Initialize lists to store results, variances, and differences in variances
+    # Initialize lists to store results, variances, and differences in variance
     results = []
     variances = []
     d_vars = []
@@ -54,7 +54,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         C, clss = kmeans(X, k, iterations)
         results.append((C, clss))
 
-        # Calculate the total variance of the dataset X with respect to the centroids C
+        # Calculate the total variance of the
+        # dataset X with respect to the centroids C
         V = variance(X, C)
         # Append the calculated variance to the variances list
         variances.append(V)
