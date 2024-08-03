@@ -4,11 +4,11 @@ import numpy as np
 
 
 def variance(X, C):
-    """ calculates the total intra-cluster variance for a data set
+    """ calculates the total intra-cluster variance fr a data set
         X: np.ndarray (n, d) dataset
           n: number of data points
           d: number of dimensions
-        C: np.ndarray (k, d) centroid means for each cluster
+        C: np.ndarray (k, d) centroid means fr each cluster
           k: number of clusters
         Returns: var, or None on failure
           var: total variance
@@ -50,7 +50,7 @@ def variance(X, C):
     # Step 5: Calculate the squared Euclidean distance between each data point and each centroid
     distance = np.linalg.norm(vectorized_data_X - vectorized_centroids, axis=2)
 
-    # Step 6: Determine the minimum squared distance for each data point
+    # Step 6: Determine the minimum squared distance fr each data point
     # Square each element of the distance
     dist_short = np.min(distance ** 2, axis=1)
 
