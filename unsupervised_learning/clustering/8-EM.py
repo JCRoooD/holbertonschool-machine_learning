@@ -22,11 +22,9 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
     n, d = X.shape
 
-
     l_prev = 0
 
     pi, m, S = initialize(X, k)
-
 
     for i in range(iterations + 1):
         if i != 0:
