@@ -9,34 +9,40 @@ maximization = __import__('7-maximization').maximization
 
 def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     """  that performs the expectation maximization for a GMM: """
-    pi, m, S = initialize(X, k)
-    if pi is None or m is None or S is None:
+    if not isinstance(X, np.ndarray) or X.ndim != 2:
+        return None, None, None, None, None
+    if not isinstance(k, int) or k <= 0:
+        return None, None, None, None, None
+    if not isinstance(iterations, int) or iterations <= 0:
+        return None, None, None, None, None
+    if not isinstance(tol, float) or tol < 0:
+        return None, None, None, None, None
+    if not isinstance(verbose, bool):
         return None, None, None, None, None
 
-    # Initialize variables
+    n, d = X.shape
+
+
     l_prev = 0
-    for i in range(iterations):
-        # Expectation step
-        g, l = expectation(X, pi, m, S)
-        if g is None or l is None:
-            return None, None, None, None, None
 
-        # Maximization step
-        pi, m, S = maximization(X, g)
-        if pi is None or m is None or S is None:
-            return None, None, None, None, None
+    pi, m, S = initialize(X, k)
 
-        # Check fr convergence
-        if abs(l - l_prev) <= tol:
+
+    for i in range(iterations + 1):
+        if i != 0:
+            l_prev = likelihood
+
+            pi, m, S = maximization(X, g)
+
+        g, likelihood = expectation(X, pi, m, S)
+
+        if verbose:
+
+            if i % 10 == 0 or i == iterations or np.abs(
+                    likelihood - l_prev) <= tol:
+                print(f"Log Likelihood after {i} iterations: {likelihood:.5f}")
+
+        if np.abs(likelihood - l_prev) < tol:
             break
-        l_prev = l
 
-        # Log likelihood if verbose is True
-        if verbose and i % 10 == 0:
-            print(f"Log Likelihood after {i} iterations: {l:.5f}")
-
-    # Final log likelihood
-    if verbose:
-        print(f"Log Likelihood after {i + 1} iterations: {l:.5f}")
-
-    return pi, m, S, g, l
+    return pi, m, S, g, likelihood
