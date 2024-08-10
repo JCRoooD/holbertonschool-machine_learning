@@ -321,20 +321,20 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         # Perform the forward algorithm to calculate the forward probabilities
         _, F = forward(Observations, Emission, Transition, Initial)
 
-        # Perform the backward algorithm to calculate the backward probabilities
+        # Perform the backward algorithm to calculate the backward probabilitie
         _, B = backward(Observations, Emission, Transition, Initial)
 
         # Initialize the numerator for the transition matrix update
         NUM = np.zeros((hidden_states, hidden_states, observations - 1))
-        
+
         # Compute the numerator for the transition matrix
         for t in range(observations - 1):
             for i in range(hidden_states):
                 for j in range(hidden_states):
                     Fit = F[i, t]  # Forward probability at time t for state i
-                    aij = Transition[i, j]  # Transition probability from state i to state j
-                    bjt1 = Emission[j, Observations[t + 1]]  # Emission probability of observation at t+1 from state j
-                    Bjt1 = B[j, t + 1]  # Backward probability at time t+1 for state j
+                    aij = Transition[i, j]
+                    bjt1 = Emission[j, Observations[t + 1]]
+                    Bjt1 = B[j, t + 1]
                     NUM[i, j, t] = Fit * aij * bjt1 * Bjt1
 
         # Compute the denominator for normalization of the transition matrix
@@ -344,7 +344,7 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         # Initialize gamma, the aggregate helper variable
         G = np.zeros((hidden_states, observations))
         NUM = np.zeros((hidden_states, observations))
-        
+
         # Compute gamma for each time step and state
         for t in range(observations):
             for i in range(hidden_states):
@@ -368,14 +368,13 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
             NUM[:, k] = np.sum(G[:, Observations == k], axis=1)
         Emission = NUM / DEN[..., np.newaxis]
 
-        # Check for early stopping condition based on Transition and Emission matrices
         if np.all(
             np.isclose(
                 Transition, transition_prev)) or np.all(
                     np.isclose(Emission, emission_prev)):
             return Transition, Emission
 
-        # Update previous Transition and Emission matrices for the next iteration
+        # Update previous Transition and Emission matrices for the next iterat
         transition_prev = np.copy(Transition)
         emission_prev = np.copy(Emission)
 
