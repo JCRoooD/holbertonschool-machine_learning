@@ -4,7 +4,7 @@ import numpy as np
 
 class GaussianProcess:
     """ Gaussian Process """
-    
+
     def __init__(self, X_init, Y_init, l=1, sigma_f=1):
         """ Class constructor """
         self.X = X_init
@@ -15,7 +15,8 @@ class GaussianProcess:
 
     def kernel(self, X1, X2):
         """ Calculates the covariance kernel matrix between two matrices """
-        # sqdist = np.sum(X1**2, 1).reshape(-1, 1) + np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
+        # sqdist = np.sum(X1**2, 1).reshape(-1, 1) +
+        # np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
         a = np.sum(X1 ** 2, axis=1, keepdims=True)
         b = np.sum(X2 ** 2, axis=1, keepdims=True)
         c = np.matmul(X1, X2.T)
@@ -26,7 +27,8 @@ class GaussianProcess:
         return K
 
     def predict(self, X_s):
-        """ Predicts the mean and standard deviation of points in a Gaussian Process """
+        """ Predicts the mean and standard
+        deviation of points in a Gaussian Process """
         # Compute the kernel matrix
         K_s = self.kernel(self.X, X_s)
         K_ss = self.kernel(X_s, X_s)
