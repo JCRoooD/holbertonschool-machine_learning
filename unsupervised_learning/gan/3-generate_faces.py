@@ -4,7 +4,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 def convolutional_GenDiscr():
-    """ This method creates a convolutional generator and discriminator"""
+    """ This method creates a generator and a discriminator"""
     def get_generator():
         """ This method creates a generator"""
         inputs = keras.Input(shape=(16,))
