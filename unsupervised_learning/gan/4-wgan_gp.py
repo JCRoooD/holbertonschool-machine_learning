@@ -152,3 +152,10 @@ class WGAN_GP(keras.Model):
             gen_gradients, self.generator.trainable_variables))
 
         return {"discr_loss": discr_loss, "gen_loss": generator_loss, "gp": gp}
+
+    def replace_weights(self, gen_h5, disc_h5):
+        """ Replace the weights for generator and discriminator
+            by the ones stored in the .h5 files
+        """
+        self.generator.load_weights(gen_h5)
+        self.discriminator.load_weights(disc_h5)
