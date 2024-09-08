@@ -1,4 +1,4 @@
-#!#!/usr/bin/env python3
+#!/usr/bin/env python3
 """This module contains the backward method for the BidirectionalCell class"""
 import numpy as np
 
