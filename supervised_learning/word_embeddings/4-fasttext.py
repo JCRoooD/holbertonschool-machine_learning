@@ -15,7 +15,7 @@ def fasttext_model(
     workers=1,
 ):
     """function that creates and trains a gensim fasttext model
-    
+
     Args:
         sentences (list): list of sentences to be trained on
         vector_size (int): dimension of the word vectors
