@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-""" 2. Train Word2Vec """
-from gensim
+"""This module creates a word2vec model"""
+import gensim
 
 
-def word2vec_model(sentences,
-                size=100,
-                min_count=5,
-                window=5,
-                negative=5,
-                cbow=True,
-                iterations=5,
-                seed=0,
-                workers=1):
-    """function that creates and trains a gensim word2vec model"""
+def word2vec_model(
+    sentences,
+    vector_size=100,
+    min_count=5,
+    window=5,
+    negative=5,
+    cbow=True,
+    epochs=5,
+    seed=0,
+    workers=1,
+):
+    """This function creates builds and trains a word2vec model
+
+    """
+    # initialize the Word2Vec model using gensim
     model = gensim.models.Word2Vec(
         sentences,
         vector_size=vector_size,

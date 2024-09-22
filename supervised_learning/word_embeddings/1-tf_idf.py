@@ -13,6 +13,5 @@ def tf_idf(sentences, vocab=None):
     vectorizer = TfidfVectorizer(vocabulary=vocab)
     X = vectorizer.fit_transform(sentences)
     word_embedd = X.toarray()
-    feature_name = vectorizer.get_feature_names()
+    feature_name = vectorizer.get_feature_names_out()
     return word_embedd, feature_name
-
