@@ -15,7 +15,6 @@ def word2vec_model(
     workers=1,
 ):
     """This function creates builds and trains a word2vec model
-
     """
     # initialize the Word2Vec model using gensim
     model = gensim.models.Word2Vec(
@@ -29,8 +28,7 @@ def word2vec_model(
         workers=workers,
         epochs=epochs,
     )
-    # build the vocabulary
-    # this hepls to create the one-hot encoding of the words
+
     model.build_vocab(sentences)
     # train the model
     model.train(sentences, total_examples=model.corpus_count,
