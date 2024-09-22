@@ -19,10 +19,13 @@ def fasttext_model(
     Args:
         sentences (list): list of sentences to be trained on
         vector_size (int): dimension of the word vectors
-        min_count (int): minimum number of occurrences of a word for it to be included in the model
+        min_count (int): minimum number of occurrences of a word
+        for it to be included in the model
         negative (int): number of negative samples
-        window (int): maximum distance between the current and predicted word within a sentence
-        cbow (bool): determines the training algorithm. If True, CBOW is used; if False, skip-gram is used
+        window (int): maximum distance between the current
+        and predicted word within a sentence
+        cbow (bool): determines the training algorithm. If True,
+        CBOW is used; if False, skip-gram is used
         epochs (int): number of iterations over the corpus
         seed (int): seed for the random number generator
         workers (int): number of worker threads to train the model
