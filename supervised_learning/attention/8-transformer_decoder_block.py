@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""This module contains the Decoder block class
+    that inherits from tensorflow.keras.layers.Layer"""
+import tensorflow as tf
+MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
+
+
+class DecoderBlock(tf.keras.layers.Layer):
+    """This class creates a decoder block for a transformer"""
+    def __init__(self, dm, h, hidden, drop_rate=0.1):
+        """
+        Class constructor
+        """
+        # call the parent class constructor
+        super(DecoderBlock, self).__init__()
+
+        # set the first multi head attention layer
+        self.mha1 = MultiHeadAttention(dm, h)
+        # set the second multi head attention layer
+        self.mha2 = MultiHeadAttention(dm, h)
+        # set the dense hidden layer with hidden units and relu activation
+        self.dense_hidden = tf.keras.layers.Dense(hidden, activation='relu')
+        # set the dense output layer with dm units
+        self.dense_output = tf.keras.layers.Dense(dm)
+        # set the layer normalization layer
+        self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+        # set the layer normalization layer
+        self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+        # set the layer normalization layer
+        self.layernorm3 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+        # set the dropout layer
+        self.dropout1 = tf.keras.layers.Dropout(drop_rate)
+        # set the dropout layer
+        self.dropout2 = tf.keras.layers.Dropout(drop_rate)
+        # set the dropout layer
+        self.dropout3 = tf.keras.layers.Dropout(drop_rate)
+
+    def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
+        """
+        This method builds the decoder block
+        Args:
+            x (tf.Tensor): a tensor of shape (batch, target_seq_len, dm)
+
+        """
+        # Masked Multi-head attention
+        masked_mha_output, _ = self.mha1(x, x, x, look_ahead_mask)
+        # 1st dropout
+        masked_mha_output = self.dropout1(masked_mha_output, training=training)
+        # 1st residual connection + layer normalization
+        output1 = self.layernorm1(x + masked_mha_output)
+
+        # Second multi-head attention
+        mha2_output, _ = self.mha2(output1, encoder_output, encoder_output,
+                                   padding_mask)
+        mha2_output = self.dropout2(mha2_output)
+
+        # 2nd residual connection + layer normalization
+        output2 = self.layernorm2(mha2_output + output1)
+
+        # Feed-forward neural network: 1st dense layer with ReLU activation
+        ff_output = self.dense_hidden(output2)
+        # Second dense layer
+        ff_output = self.dense_output(ff_output)
+        ff_output = self.dropout3(ff_output, training=training)
+
+        # 2nd Residual connection + layer normalization
+        output2 = self.layernorm3(ff_output + output2)
+
+        return output2
