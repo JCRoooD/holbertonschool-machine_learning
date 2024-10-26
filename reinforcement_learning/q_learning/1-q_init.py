@@ -10,4 +10,3 @@ def q_init(env):
     """
     q_table = np.zeros((env.observation_space.n, env.action_space.n))
     return q_table
-
