@@ -14,5 +14,5 @@ def epsilon_greedy(Q, state, epsilon):
         explore = np.random.randint(Q.shape[1])
     else:
         explore = np.argmax(Q[state])
-    
+
     return explore
