@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ Temporal Difference """
 import numpy as np
-import random
 
 
 def monte_carlo(env, V, policy, episodes=5000, max_steps=100,
