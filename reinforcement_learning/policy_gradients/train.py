@@ -3,7 +3,7 @@
 import numpy as np
 policy_gradient = __import__('policy_gradient').policy_gradient
 
-def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=True):
+def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False:
     """
     Train the policy using Monte-Carlo policy gradient.
     """
