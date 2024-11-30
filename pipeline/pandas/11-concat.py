@@ -1,4 +1,4 @@
-#!/bin/usr/env python3
+#!/usr/bin/env python3
 """ concat module"""
 import pandas as pd
 index = __import__('10-index').index
