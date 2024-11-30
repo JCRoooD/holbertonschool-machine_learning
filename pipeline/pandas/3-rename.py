@@ -8,10 +8,10 @@ def rename_columns(df, columns):
     # rename columns
     df = df.rename(columns={'Timestamp': 'Datetime'})
 
-    # datetime column to datetime objects
+    # Convert the 'Datetime' column to datetime objects
     df['Datetime'] = pd.to_datetime(df['Datetime'], unit='s')
 
-    # display 
+    # Display only the 'Datetime' and 'Close' columns
     df = df[['Datetime', 'Close']]
 
     return df
