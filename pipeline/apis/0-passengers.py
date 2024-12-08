@@ -4,6 +4,12 @@ import requests
 
 
 def availableShips(passengerCount):
+    """ availableShips function
+    Args:
+        passengerCount: Number of passengers
+    Returns:
+    List of ships that can carry the given number of passengers
+    """
     url = "https://swapi.dev/api/starships/"
     # Initialize an empty list to store the names of ships that can
     # carry the given number of passengers
