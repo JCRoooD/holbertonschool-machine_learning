@@ -10,7 +10,8 @@ def sentientPlanets():
         None
     Returns:
     List of planets with sentient life
-    this module fetches and displays a list of planets that have sentient life forms.
+    this module fetches and displays a list of planets that have
+    sentient life forms.
     """
     url = "https://swapi-api.hbtn.io/api/species/"
     planets_list = []

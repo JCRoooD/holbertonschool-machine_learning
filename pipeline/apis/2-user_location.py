@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def user_location(ip):
-    """ 
+    """
     Function that returns the location of a user based on their IP address
     Args:
         ip: IP address of the user
