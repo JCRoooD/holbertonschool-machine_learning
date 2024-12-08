@@ -12,9 +12,13 @@ def user_location(ip):
         ip: IP address of the user
     Returns:
     Location of the user
+
+    this module fetches and displays the location of a
+    user based on their IP address.
     """
     response = requests.get(api_url)
-    # Check if the request was successful
+
+    # If user does not exist (404)
     if response.status_code == 404:
         print("Not found")
 

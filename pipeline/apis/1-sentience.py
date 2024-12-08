@@ -5,36 +5,48 @@ import requests
 
 def sentientPlanets():
     """ 
-    Function that returns a list of planets that have sentient life
+    Function that returns a list of planets that have sentient life forms
     Args:
         None
     Returns:
-    List of planets that have sentient life
+    List of planets with sentient life
     """
-    url = "https://swapi.dev/api/planets/"
-    # Initialize an empty list to store the names of planets that have sentient life
-    planets = []
+    url = "https://swapi-api.hbtn.io/api/species/"
+    planets_list = []
 
-    # Loop to paginate through all pages of the API response
     while url:
-        # Send a GET request to the current URL
+        # Send a GET request to the species URL
         response = requests.get(url)
+
         # Check if the request was successful
         if response.status_code != 200:
-            break
+            raise RuntimeError(f"Failed to fetch data: {response.status_code}")
 
         # Parse the JSON response
         data = response.json()
-        # Iterate through the list of planets in the current page of the response
-        for planet in data.get('results', []):
-            try:
-                if planet.get('population').isdigit() and int(planet.get('population')) > 1000000000:
-                    planets.append(planet.get('name'))
-            except ValueError:
-                continue
 
-        # Get the URL for the next page of results
-        url = data.get('next')
+        # Iterate through each species in the results
+        for species in data.get("results", []):
+            # Check if the species is sentient
+            classification = species.get("classification", "").lower()
+            designation = species.get("designation", "").lower()
+            if "sentient" in classification or "sentient" in designation:
+                # Fetch the homeworld URL
+                homeworld_url = species.get("homeworld")
+                if homeworld_url:
+                    # Send a GET request to the homeworld URL
+                    homeworld_response = requests.get(homeworld_url)
 
-    # Return the list of planets that have sentient life
-    return planets
+                    # Check if the request was successful
+                    if homeworld_response.status_code == 200:
+                        # Get the homeworld name from the JSON response
+                        homeworld_name = homeworld_response.json().get("name")
+
+                        # Only add the homeworld name to the list if it exists
+                        if homeworld_name:
+                            planets_list.append(homeworld_name)
+
+        # Get the URL for the next page of species
+        url = data.get("next")
+
+    return planets_list
