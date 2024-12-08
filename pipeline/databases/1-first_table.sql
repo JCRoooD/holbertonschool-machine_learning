@@ -1,5 +1,5 @@
 -- Description: Create the first table
-CREATE TABLE IF NOT EXISTS pipe_table (
+CREATE TABLE IF NOT EXISTS first_table (
     id INT,
     name VARCHAR(256)
 );
