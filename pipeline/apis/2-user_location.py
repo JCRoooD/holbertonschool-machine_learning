@@ -2,7 +2,7 @@
 """ User location module"""
 import requests
 import sys
-from datetime import datetime\
+from datetime import datetime
 
 
 def user_location(ip):
@@ -46,4 +46,4 @@ if __name__ == '__main__':
         sys.exit(1)
 
     api_url = sys.argv[1]
-    get_user_location(api_url)
+    user_location(api_url)
