@@ -3,6 +3,6 @@
 import tensorflow as tf
 
 
-def change_contrast(image, c_factor, c_amount):
+def change_contrast(image, lower, upper):
     """ changes the contrast of an image"""
-    return tf.image.adjust_contrast(image, c_factor)
+    return tf.image.adjust_contrast(image, lower, upper)

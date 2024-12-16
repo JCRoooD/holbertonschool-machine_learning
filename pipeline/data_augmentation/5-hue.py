@@ -3,6 +3,6 @@
 import tensorflow as tf
 
 
-def change_hue(image, max_delta):
+def change_hue(image, delta):
     """ randomly changes the hue of an image"""
-    return tf.image.random_hue(image, max_delta)
+    return tf.image.random_hue(image, delta)
