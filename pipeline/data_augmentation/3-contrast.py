@@ -5,4 +5,4 @@ import tensorflow as tf
 
 def change_contrast(image, lower, upper):
     """ changes the contrast of an image"""
-    return tf.image.adjust_contrast(image, lower, upper)
+    return tf.image.random_contrast(image, lower, upper)
